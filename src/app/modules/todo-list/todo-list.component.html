@@ -1,0 +1,38 @@
+<todo-add-todo (actionButtonClick)="onAddToDo($event)"></todo-add-todo>
+<mat-chip-listbox
+    class="todo-list-filter-container"
+    aria-label="ToDo list filters"
+    selectable="true"
+    [(ngModel)]="selectedFilter"
+    (change)="onFilterSelectionChange($event)"
+>
+    <mat-chip-option
+        *ngFor="let option of toDoFilterOptions"
+        class="todo-list-filter-option"
+        [value]="option.id"
+        [selected]="option.selected"
+        >{{ option.label }}</mat-chip-option
+    >
+</mat-chip-listbox>
+<p class="todo-list-remaining-todos">3 tasks remaining</p>
+<cdk-virtual-scroll-viewport class="todo-list-container" [itemSize]="88">
+    <div class="todo-list-item" *cdkVirtualFor="let item of toDoList?.todos">
+        <div class="todo-list-item-checkbox">
+            <mat-checkbox [checked]="item.completed">{{
+                item.todo
+            }}</mat-checkbox>
+        </div>
+        <div class="todo-list-item-actions">
+            <button
+                [routerLink]="['/edit', item.id]"
+                class="todo-list-item-actions-button"
+                mat-stroked-button
+            >
+                Edit
+            </button>
+            <button class="todo-list-item-actions-button" mat-flat-button>
+                Delete
+            </button>
+        </div>
+    </div>
+</cdk-virtual-scroll-viewport>

@@ -1,0 +1,32 @@
+<p class="add-todo-form-title">What needs to be done?</p>
+<form class="add-todo-form" [formGroup]="form">
+    <mat-form-field class="add-todo-form-input">
+        <input
+            formControlName="todo"
+            matInput
+            placeholder="Ex. Buy food for the dogs"
+        />
+    </mat-form-field>
+    <mat-checkbox
+        class="add-todo-form-checkbox"
+        *ngIf="showCompletedCheckbox"
+        formControlName="completed"
+        >Completed</mat-checkbox
+    >
+</form>
+<button
+    class="add-todo-form-button"
+    mat-flat-button
+    [disabled]="form.invalid"
+    (click)="onActionButtonClick(form.value)"
+>
+    {{ buttonText }}
+</button>
+<button
+    *ngIf="showBackButton"
+    class="add-todo-form-button"
+    mat-stroked-button
+    (click)="backButtonClick.emit()"
+>
+    Back to list
+</button>

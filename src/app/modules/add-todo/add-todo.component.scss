@@ -1,0 +1,21 @@
+:host,
+.add-todo-form,
+.add-todo-form-input {
+    width: 100%;
+}
+
+.add-todo-form-title {
+    text-align: center;
+    font-size: 18px;
+}
+
+.add-todo-form-button {
+    width: 100%;
+    + .add-todo-form-button {
+        margin-top: 16px;
+    }
+}
+
+.add-todo-form-checkbox {
+    margin-bottom: 24px;
+}

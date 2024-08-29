@@ -1,0 +1,8 @@
+<todo-add-todo
+    [buttonText]="'Save'"
+    [showCompletedCheckbox]="true"
+    [showBackButton]="true"
+    [toDo]="selectedToDo"
+    (actionButtonClick)="onUpdateToDo($event)"
+    (backButtonClick)="onBackToList()"
+></todo-add-todo>
