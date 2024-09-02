@@ -3,7 +3,7 @@ import { MatChipListboxChange } from '@angular/material/chips';
 import { Store } from '@ngrx/store';
 import * as actions from '../../store/actions';
 import { Subject, takeUntil } from 'rxjs';
-import { selectToDoList } from '../../store/selectors';
+import { selectToDoList, selectToDoMaticLoading } from '../../store/selectors';
 import { AppState, initialToDoMaticState } from '../../store/state';
 import { ToDo } from '../../models/todo.model';
 
@@ -16,6 +16,11 @@ import { ToDo } from '../../models/todo.model';
 export class TodoListComponent implements OnInit, OnDestroy {
     public unfilteredToDoList = initialToDoMaticState.toDoList;
     public toDoList = initialToDoMaticState.toDoList;
+    public loading$ = this.store.select(selectToDoMaticLoading());
+    public get activeToDos(): number {
+        return this.toDoList.todos.filter((toDo) => !toDo.completed).length;
+    }
+
     private toDoList$ = this.store.select(selectToDoList);
     private destroy$ = new Subject();
 
@@ -37,7 +42,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     ];
 
     public onFilterSelectionChange(change: MatChipListboxChange) {
-        // If user deselects all option we need to set it to all by default
+        // If user deselects all options we need to set it to all by default
         if (!change.value) {
             setTimeout(() => {
                 this.selectedFilter = 'all';

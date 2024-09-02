@@ -14,8 +14,14 @@
         >{{ option.label }}</mat-chip-option
     >
 </mat-chip-listbox>
-<p class="todo-list-remaining-todos">3 tasks remaining</p>
+<p class="todo-list-remaining-todos">
+    {{ activeToDos }} {{ activeToDos === 1 ? "task" : "tasks" }} remaining
+</p>
 <cdk-virtual-scroll-viewport class="todo-list-container" [itemSize]="88">
+    <mat-spinner
+        *ngIf="loading$ | async"
+        class="todo-list-spinner"
+    ></mat-spinner>
     <div class="todo-list-item" *cdkVirtualFor="let item of toDoList?.todos">
         <div class="todo-list-item-checkbox">
             <mat-checkbox [checked]="item.completed">{{

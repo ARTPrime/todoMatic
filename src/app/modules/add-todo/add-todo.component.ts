@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToDo } from '../../models/todo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FOCUS_MONITOR_DEFAULT_OPTIONS } from '@angular/cdk/a11y';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/state';
+import { selectToDoMaticLoading } from '../../store/selectors';
 
 @Component({
     selector: 'todo-add-todo',
@@ -20,8 +23,12 @@ export class AddTodoComponent implements OnInit {
     @Output() actionButtonClick = new EventEmitter<ToDo>();
     @Output() backButtonClick = new EventEmitter();
     public form = new FormGroup({} as any);
+    public loading$ = this.store.select(selectToDoMaticLoading());
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private store: Store<AppState>
+    ) {}
 
     public ngOnInit(): void {
         this.form = this.formBuilder.group({

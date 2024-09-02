@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { AddTodoComponent } from './add-todo.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     declarations: [AddTodoComponent],
@@ -13,10 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         CommonModule,
         MatFormFieldModule,
         MatInputModule,
-        MatButtonModule,
-        MatCheckboxModule,
+        MatIconModule,
+        MatIconModule,
+        SharedModule,
         ReactiveFormsModule,
-        FormsModule,
     ],
     exports: [AddTodoComponent],
 })

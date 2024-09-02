@@ -4,10 +4,9 @@ import { TodoListComponent } from './todo-list.component';
 import { TodoListRoutingModule } from './todo-list-routing.module';
 import { AddTodoModule } from '../add-todo/add-todo.module';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     declarations: [TodoListComponent],
@@ -16,9 +15,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         TodoListRoutingModule,
         AddTodoModule,
         FormsModule,
+        SharedModule,
         MatChipsModule,
-        MatCheckboxModule,
-        MatButtonModule,
         ScrollingModule,
     ],
 })

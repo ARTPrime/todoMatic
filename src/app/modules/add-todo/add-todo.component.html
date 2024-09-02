@@ -21,6 +21,9 @@
     (click)="onActionButtonClick(form.value)"
 >
     {{ buttonText }}
+    <mat-icon *ngIf="loading$ | async" iconPositionEnd>
+        <mat-spinner diameter="16"></mat-spinner>
+    </mat-icon>
 </button>
 <button
     *ngIf="showBackButton"
