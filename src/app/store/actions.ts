@@ -1,4 +1,4 @@
-import { createAction, props, UPDATE } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { ToDo } from '../models/todo.model';
 import { ToDoList } from '../models/todo-list.model';
 
@@ -9,6 +9,8 @@ export enum ToDoMaticActionTypes {
     ADD_TODO_SUCCESS = '[ToDo Matic] Add ToDo Success',
     UPDATE_TODO = '[ToDo Matic] Update ToDo',
     UPDATE_TODO_SUCCESS = '[ToDo Matic] Update ToDo Success',
+    DELETE_TODO = '[ToDo Matic] Delete ToDo',
+    DELETE_TODO_SUCCESS = '[ToDo Matic] Delete ToDo Success',
     TODO_ERROR = '[ToDo App] Error',
 }
 
@@ -31,6 +33,14 @@ export const updateTodo = createAction(
 );
 export const updateTodoSuccess = createAction(
     ToDoMaticActionTypes.UPDATE_TODO_SUCCESS,
+    props<{ toDo: ToDo }>()
+);
+export const deleteTodo = createAction(
+    ToDoMaticActionTypes.DELETE_TODO,
+    props<{ toDo: ToDo }>()
+);
+export const deleteTodoSuccess = createAction(
+    ToDoMaticActionTypes.DELETE_TODO_SUCCESS,
     props<{ toDo: ToDo }>()
 );
 export const toDoError = createAction(

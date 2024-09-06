@@ -17,7 +17,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     public unfilteredToDoList = initialToDoMaticState.toDoList;
     public toDoList = initialToDoMaticState.toDoList;
     public loading$ = this.store.select(selectToDoMaticLoading());
-    public get activeToDos(): number {
+    public get activeOrCompletedToDos(): number {
+        if (this.selectedFilter === 'completed') {
+            return this.toDoList.todos.filter((toDo) => toDo.completed).length;
+        }
         return this.toDoList.todos.filter((toDo) => !toDo.completed).length;
     }
 
@@ -79,6 +82,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
     public onAddToDo(toDo: ToDo) {
         this.store.dispatch(actions.addTodo({ toDo }));
+    }
+
+    public onDeleteToDo(toDo: ToDo) {
+        this.store.dispatch(actions.deleteTodo({ toDo }));
     }
 
     public ngOnDestroy(): void {

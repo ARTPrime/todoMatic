@@ -1,0 +1,11 @@
+.tbdm-text-input.mat-mdc-form-field {
+    .mdc-text-field {
+        &--filled {
+            background-color: white;
+            border: solid 1px #201a1b;
+        }
+    }
+    .mdc-line-ripple {
+        display: none;
+    }
+}

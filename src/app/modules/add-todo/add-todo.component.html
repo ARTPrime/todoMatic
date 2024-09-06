@@ -1,6 +1,6 @@
 <p class="add-todo-form-title">What needs to be done?</p>
 <form class="add-todo-form" [formGroup]="form">
-    <mat-form-field class="add-todo-form-input">
+    <mat-form-field class="add-todo-form-input tbdm-text-input">
         <input
             formControlName="todo"
             matInput
@@ -15,9 +15,9 @@
     >
 </form>
 <button
-    class="add-todo-form-button"
     mat-flat-button
-    [disabled]="form.invalid"
+    class="tdm-button tdm-button--dark tdm-button--ligth-text add-todo-form-button"
+    [disabled]="form.invalid || form.pristine"
     (click)="onActionButtonClick(form.value)"
 >
     {{ buttonText }}
@@ -27,8 +27,9 @@
 </button>
 <button
     *ngIf="showBackButton"
-    class="add-todo-form-button"
     mat-stroked-button
+    disableRipple
+    class="tdm-button tdm-button--dark tdm-button--outlined add-todo-form-button"
     (click)="backButtonClick.emit()"
 >
     Back to list

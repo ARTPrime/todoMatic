@@ -1,0 +1,22 @@
+.tdm-chip {
+    &.mdc-evolution-chip {
+        border-radius: 2px;
+        &--selected {
+            background-color: transparent !important;
+            .mdc-evolution-chip {
+                &__action::before {
+                    border-width: 2px !important;
+                }
+            }
+        }
+    }
+    .mdc-evolution-chip {
+        &__cell {
+            justify-content: center;
+        }
+        &__action::before {
+            border-radius: 2px !important;
+            pointer-events: all !important;
+        }
+    }
+}

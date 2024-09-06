@@ -33,14 +33,27 @@ export class ToDoMaticApiService {
     }
 
     /**
-     * Calls APU to PUT a todo update
+     * Calls API to PUT a todo update
      * @param updatedTodo The todo to update
      * @returns The todo with updated values
      */
     public updateTodo(updatedTodo: ToDo): Observable<ToDo> {
         return this.httpClient.put<ToDo>(
             `${this.todoServiceBaseUrl}/${updatedTodo.id}`,
-            updatedTodo
+            {
+                completed: updatedTodo.completed,
+            }
+        );
+    }
+
+    /**
+     * Calls API to PUT a todo update
+     * @param updatedTodo The todo to update
+     * @returns The todo with updated values
+     */
+    public deleteTodo(deletedToDo: ToDo): Observable<ToDo> {
+        return this.httpClient.delete<ToDo>(
+            `${this.todoServiceBaseUrl}/${deletedToDo.id}`
         );
     }
 }

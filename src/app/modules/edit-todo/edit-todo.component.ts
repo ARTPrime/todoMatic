@@ -27,10 +27,10 @@ export class EditTodoComponent implements OnInit {
     public ngOnInit(): void {
         this.route.paramMap
             .pipe(
-                take(1),
                 switchMap((params) =>
                     this.store.select(selectToDo(Number(params.get('id'))))
-                )
+                ),
+                take(1)
             )
             .subscribe((toDo) => {
                 if (toDo) {

@@ -1,3 +1,28 @@
-.button--dark {
-    background-color: black;
+.tdm-button.mdc-button {
+    border-radius: 2px;
+    &.tdm-button {
+        &--dark {
+            &:enabled {
+                background-color: #201a1b;
+                color: #fffbff;
+            }
+        }
+        &--red {
+            &:enabled {
+                background-color: #c54242;
+            }
+        }
+        &--outlined {
+            &.tdm-button--dark {
+                color: #201a1b;
+                background-color: transparent;
+                &:hover {
+                    background-color: #eeefef;
+                }
+            }
+            .mat-mdc-button-persistent-ripple::before {
+                opacity: 0;
+            }
+        }
+    }
 }

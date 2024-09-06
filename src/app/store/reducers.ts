@@ -9,7 +9,7 @@ export const ToDoMaticReducer = createReducer(
     on(TodoMaticActions.getTodosList, (state) => ({ ...state, loading: true })),
     on(TodoMaticActions.getTodosListSuccess, (state, { toDoList }) => ({
         ...state,
-        toDoList,
+        toDoList: state.toDoList.todos.length > 0 ? state.toDoList : toDoList,
         loading: false,
     })),
     on(TodoMaticActions.addTodo, (state) => ({ ...state, loading: true })),
@@ -24,6 +24,11 @@ export const ToDoMaticReducer = createReducer(
         toDoList: updateToDoInList(state.toDoList, toDo),
         loading: false,
     })),
+    on(TodoMaticActions.deleteTodoSuccess, (state, { toDo }) => ({
+        ...state,
+        toDoList: deleteToDoInList(state.toDoList, toDo),
+        loading: false,
+    })),
     on(TodoMaticActions.toDoError, (state) => ({ ...state, loading: false }))
 );
 
@@ -36,9 +41,18 @@ const updateToDoInList = (toDoList: ToDoList, toDo: ToDo): ToDoList => {
     const updatedToDoIndex = toDoList.todos.findIndex(
         (item) => item.id === toDo.id
     );
-    const newToDoList = toDoList.todos
-        .filter((item) => item.id !== toDo.id)
-        .splice(updatedToDoIndex, 0, toDo);
+    const newToDoList = toDoList.todos.filter((item) => item.id !== toDo.id);
+
+    newToDoList.splice(updatedToDoIndex, 0, toDo);
+
+    return {
+        ...toDoList,
+        todos: newToDoList,
+    };
+};
+
+const deleteToDoInList = (toDoList: ToDoList, toDo: ToDo): ToDoList => {
+    const newToDoList = toDoList.todos.filter((item) => item.id !== toDo.id);
 
     return {
         ...toDoList,

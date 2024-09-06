@@ -57,7 +57,21 @@ export class ToDoMaticEffects {
         );
     });
 
-    // TODO: Implement error effect to show the error notification
+    public deleteToDo$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(ToDoMaticActionTypes.DELETE_TODO),
+            exhaustMap((params: { toDo: ToDo }) =>
+                this.toDoMaticApiService.deleteTodo(params.toDo).pipe(
+                    map((toDo: ToDo) =>
+                        TodoMaticActions.deleteTodoSuccess({ toDo })
+                    ),
+                    catchError((error) =>
+                        of(TodoMaticActions.toDoError({ error }))
+                    )
+                )
+            )
+        );
+    });
 
     constructor(
         private actions$: Actions,

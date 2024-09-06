@@ -1,44 +1,59 @@
 <todo-add-todo (actionButtonClick)="onAddToDo($event)"></todo-add-todo>
-<mat-chip-listbox
-    class="todo-list-filter-container"
-    aria-label="ToDo list filters"
-    selectable="true"
-    [(ngModel)]="selectedFilter"
-    (change)="onFilterSelectionChange($event)"
->
-    <mat-chip-option
-        *ngFor="let option of toDoFilterOptions"
-        class="todo-list-filter-option"
-        [value]="option.id"
-        [selected]="option.selected"
-        >{{ option.label }}</mat-chip-option
+<main class="todo-list-main-container">
+    <mat-chip-listbox
+        class="todo-list-filter-container"
+        aria-label="ToDo list filters"
+        selectable="true"
+        [(ngModel)]="selectedFilter"
+        (change)="onFilterSelectionChange($event)"
     >
-</mat-chip-listbox>
-<p class="todo-list-remaining-todos">
-    {{ activeToDos }} {{ activeToDos === 1 ? "task" : "tasks" }} remaining
-</p>
-<cdk-virtual-scroll-viewport class="todo-list-container" [itemSize]="88">
-    <mat-spinner
-        *ngIf="loading$ | async"
-        class="todo-list-spinner"
-    ></mat-spinner>
-    <div class="todo-list-item" *cdkVirtualFor="let item of toDoList?.todos">
-        <div class="todo-list-item-checkbox">
-            <mat-checkbox [checked]="item.completed">{{
-                item.todo
-            }}</mat-checkbox>
+        <mat-chip-option
+            *ngFor="let option of toDoFilterOptions"
+            class="tdm-chip todo-list-filter-option"
+            [value]="option.id"
+            [selected]="option.selected"
+            >{{ option.label }}</mat-chip-option
+        >
+    </mat-chip-listbox>
+    <p class="todo-list-remaining-todos">
+        {{ activeOrCompletedToDos }}
+        {{ activeOrCompletedToDos === 1 ? "task" : "tasks" }}
+        {{ selectedFilter === "completed" ? "completed" : "remaining" }}
+    </p>
+    <cdk-virtual-scroll-viewport
+        class="todo-list-item-container"
+        [itemSize]="88"
+    >
+        <mat-spinner
+            *ngIf="loading$ | async"
+            class="todo-list-spinner"
+        ></mat-spinner>
+        <div
+            class="todo-list-item"
+            *cdkVirtualFor="let item of toDoList?.todos"
+        >
+            <div class="todo-list-item-checkbox">
+                <mat-checkbox [checked]="item.completed">{{
+                    item.todo
+                }}</mat-checkbox>
+            </div>
+            <div class="todo-list-item-actions">
+                <button
+                    mat-stroked-button
+                    class="tdm-button tdm-button--dark tdm-button--outlined todo-list-item-actions-button"
+                    disableRipple
+                    [routerLink]="['/edit', item.id]"
+                >
+                    Edit
+                </button>
+                <button
+                    mat-flat-button
+                    class="tdm-button tdm-button--red todo-list-item-actions-button"
+                    (click)="onDeleteToDo(item)"
+                >
+                    Delete
+                </button>
+            </div>
         </div>
-        <div class="todo-list-item-actions">
-            <button
-                [routerLink]="['/edit', item.id]"
-                class="todo-list-item-actions-button"
-                mat-stroked-button
-            >
-                Edit
-            </button>
-            <button class="todo-list-item-actions-button" mat-flat-button>
-                Delete
-            </button>
-        </div>
-    </div>
-</cdk-virtual-scroll-viewport>
+    </cdk-virtual-scroll-viewport>
+</main>

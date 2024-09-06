@@ -37,8 +37,8 @@
                             }
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "@angular/material/prebuilt-themes/rose-red.css"
+                            "@angular/material/prebuilt-themes/rose-red.css",
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     },

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToDo } from '../../models/todo.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FOCUS_MONITOR_DEFAULT_OPTIONS } from '@angular/cdk/a11y';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/state';
 import { selectToDoMaticLoading } from '../../store/selectors';
@@ -41,12 +40,5 @@ export class AddTodoComponent implements OnInit {
 
     public onActionButtonClick(toDo: ToDo) {
         this.actionButtonClick.emit(toDo);
-        if (!this.showBackButton) {
-            this.toDo = {
-                completed: false,
-                todo: null,
-                userId: 3,
-            };
-        }
     }
 }
